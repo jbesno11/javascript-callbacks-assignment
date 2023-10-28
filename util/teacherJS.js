@@ -5,7 +5,7 @@ function finishFunctionality(e) {
     } else {
         const app = document.querySelector('.app')
         let error = document.createElement('p') 
-        error.innerHTML=`<p class="error">There was an error submitting the form...</p>`
+        error.innerHTML=`<p class="error" id="errorText">There was an error submitting the form...</p>`
         app.appendChild(error);
     }
 }

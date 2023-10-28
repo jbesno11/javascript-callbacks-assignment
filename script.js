@@ -23,3 +23,71 @@
 //Hint: When dealing with a form submission that takes an event variable as a parameter, use e.preventDefault()
 //      (or event.preventDefault() depending on the name of the variable) to prevent the page
 //      from refreshing when a form is submitted. Do all your checks after that line.
+
+
+//this is outside the function so it only gets 
+//created once to check if the red text at the bottom 
+//has been added to the page
+var hasErrorText = false;
+
+function validateForm(e){
+
+    //prevents the web page feom reloading on submit
+    e.preventDefault();
+
+
+    //pulls in the text to check
+    const name = document.querySelector("#name").value.trim();
+    const email = document.querySelector("#email").value.trim();
+    const pass = document.querySelector("#password").value.trim();
+
+    
+    /*checking if i'm  pulling values in correctly
+    console.log(name);
+    console.log(email);
+    console.log(pass); */
+
+
+    //checks if text has some value in it
+    if(!name){
+        alert("You must enter a name!");
+        hasErrorText = true;
+        return false;
+    }
+
+    //checks if email has a @ and .
+    if(!email.includes("@") || !email.includes(".") ){
+        alert("Must use a valid email address that contains an \"@\" and \".\" ");
+        hasErrorText = true;
+        return false;
+    }
+
+    //checks if password has at least 8 characters in it
+    if(pass.length < 8){
+        alert("password must be at least 8 characters long!");
+        hasErrorText = true;
+        return false;
+    }
+
+
+    //checks if we had tripped an error and if a user enters in
+    //credentals after triggering an error it will get rid of the
+    //text for some reason it onlt works once
+    if(hasErrorText){
+        hasErrorText = false;
+    document.getElementById('errorText').innerText = "";
+    
+    }
+
+    //ends of validateForm
+    return true;
+
+
+}
+
+
+//hooks the button up to buttonPress
+const buttonPress = document.querySelector("#userForm");
+
+//runs validateForm when button is pressed
+buttonPress.addEventListener("submit", validateForm);
